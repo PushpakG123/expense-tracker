@@ -1,182 +1,213 @@
-# Expense Tracker — Full-Stack Application
+# Expense Tracker – Full-Stack Personal Finance Management
 
-A full-stack personal finance management application built with **Spring Boot**, **React**, **TypeScript**, and **Vite**.
+A full-stack personal finance management application built using **Java 17, Spring Boot, React, TypeScript, and MySQL/H2**. It enables users to manage income and expenses, organize transactions, monitor monthly budgets, and visualize financial activity through an interactive dashboard.
 
-The system allows users to securely authenticate, manage categories, track income & expenses, generate monthly reports, and visualize spending analytics using real backend data.
+The application follows a RESTful architecture with JWT-based authentication, protected endpoints, server-side validation, and a responsive frontend.
 
----
+## Features
 
-## 🚀 Features
+### Authentication & Security
+- User registration and login with JWT authentication
+- Access token and refresh token workflow
+- Spring Security integration
+- Protected REST API endpoints
+- User-specific data access
+- Role-based authorization
 
-### 🔐 Authentication
-- Secure login & registration with **JWT Authentication**
-- Access token + refresh token workflow
-- Protected API endpoints
-- Role-based access (`USER`)
+### Transaction Management
+- Create, update, and delete transactions
+- Manage income and expense records
+- Filter transactions by category, type, and month
+- Paginated transaction listing
+- Server-side request validation
+- Transactions associated with authenticated users
 
-### 💸 Transactions
-- Add, edit, and delete income/expense records
-- Filter by category, type, and month
-- Paginated transaction list
-- Linked to authenticated user
-- Server-side validation
+### Category Management
+- Create and manage custom categories
+- Default categories for new users
+- Category-based transaction filtering
+- Category-wise spending analysis
 
-### 🗂 Categories
-- Create custom categories
-- Default categories on first login
-- Category-based analytics & filtering
+### Interactive Dashboard
+- Monthly income and expense summaries
+- Automatic balance calculation
+- Donut chart for category-wise spending
+- Line chart showing the last six months of financial activity
+- Dynamic dashboard powered by backend API data
 
-### 📊 Dashboard
-- Monthly income & expense summary
-- Auto-calculated balance
-- Donut chart: spending by category
-- Line chart: last 6 months history
-- Fully dynamic (real backend data)
+### Recurring Payments
+- Manage recurring expenses and subscriptions
+- Track upcoming payment dates
+- Calculate next payment dates
+- Monthly recurring payment forecast
 
-### 🔁 Recurring Payments
-- Add recurring subscriptions (rent, Netflix, etc.)
-- Auto-calculated next payment date
-- Monthly forecast
+### Financial Reports
+- Monthly financial summaries
+- Category-wise expense breakdown
+- Aggregated reporting queries
+- SQL-based data analysis
 
-### 📑 Reports
-- Monthly breakdown
-- Category totals
-- Aggregated summary queries
-- Optimized SQL queries
+## Technology Stack
 
----
+| Layer | Technologies |
+|---|---|
+| Backend | Java 17, Spring Boot 3 |
+| Security | Spring Security, JWT |
+| Database | H2 Database |
+| ORM | Spring Data JPA, Hibernate |
+| API | REST APIs |
+| Build Tool | Maven |
+| Frontend | React, TypeScript, Vite |
+| Styling | Tailwind CSS |
+| State Management | Zustand |
+| HTTP Client | Axios |
+| Charts | Recharts |
+| Version Control | Git, GitHub |
 
-## 🛠 Tech Stack
+## Project Architecture
 
-### Backend
-- Java 17
-- Spring Boot 3
-- Spring Security (JWT)
-- Spring Data JPA
-- H2 Database (dev mode)
-- Maven
-
-### Frontend
-- React (TypeScript)
-- Vite
-- Axios
-- Zustand
-- Tailwind CSS
-- Recharts
-
----
-
-## 📁 Project Structure
-
-expense-tracker
-├── src
-├── frontend
-├── screenshots
+```text
+expense-tracker/
+│
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── .../
+│       └── resources/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── screenshots/
 ├── pom.xml
+├── mvnw
+├── mvnw.cmd
 └── README.md
----
+```
 
-## ▶️ How to Run the Project Locally
+## Getting Started
 
-### 1️⃣ Start the backend
+### Prerequisites
+
+Install the following before running the application:
+
+- Java 17 or later
+- Node.js and npm
+- Git
+- Maven (optional if using the included Maven Wrapper)
+
+### 1. Clone the Repository
 
 ```bash
+git clone https://github.com/PushpakG123/expense-tracker.git
 cd expense-tracker
-mvnw.cmd spring-boot:run
-Backend runs at:
+```
+
+### 2. Start the Spring Boot Backend
+
+**Windows PowerShell:**
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+**macOS / Linux:**
+
+```bash
+./mvnw spring-boot:run
+```
+
+Backend URL:
+
+```text
 http://localhost:8080
+```
 
-Windows users must use mvnw.cmd
-Mac/Linux users can use ./mvnw spring-boot:run
+### 3. Start the React Frontend
 
-2️⃣ Start the frontend
+Open another terminal:
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
+Frontend URL:
 
-Frontend runs at:
+```text
 http://localhost:5173
+```
 
-📚 API Overview
-Auth
+## API Overview
 
-POST /api/auth/register
+| Module | Method | Endpoint | Description |
+|---|---|---|---|
+| Authentication | POST | `/api/auth/register` | Register a user |
+| Authentication | POST | `/api/auth/login` | Authenticate user |
+| Authentication | POST | `/api/auth/refresh` | Refresh access token |
+| Transactions | GET | `/api/transactions` | Retrieve transactions |
+| Transactions | POST | `/api/transactions` | Create transaction |
+| Transactions | DELETE | `/api/transactions/{id}` | Delete transaction |
+| Categories | GET | `/api/categories` | Retrieve categories |
+| Categories | POST | `/api/categories` | Create category |
+| Categories | DELETE | `/api/categories/{id}` | Delete category |
+| Reports | GET | `/api/reports/monthly?month=YYYY-MM` | Retrieve monthly report |
 
-POST /api/auth/login
+## Screenshots
 
-POST /api/auth/refresh
+### Login
+![Login](screenshots/login.png)
 
-Transactions
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
-GET /api/transactions
+### Transactions
+![Transactions](screenshots/transactions.png)
 
-POST /api/transactions
+### Categories
+![Categories](screenshots/categories.png)
 
-DELETE /api/transactions/{id}
+### Reports
+![Reports](screenshots/reports.png)
 
-Categories
+### Recurring Payments
+![Recurring Payments](screenshots/recurring.png)
 
-GET /api/categories
+## Testing
 
-POST /api/categories
+- Backend unit-level tests
+- JWT authentication workflow testing
+- H2 database for development and testing
 
-DELETE /api/categories/{id}
+## Future Enhancements
 
-Reports
+- Export financial reports in PDF and CSV formats
+- Automated recurring payment processing
+- Dark and light theme support
+- Docker containerization
+- PostgreSQL production configuration
 
-GET /api/reports/monthly?month=YYYY-MM
+## What This Project Demonstrates
 
-## 📸 Screenshots
+- Building RESTful backend services using Java and Spring Boot
+- Implementing authentication and authorization using Spring Security and JWT
+- Designing relational data models with Spring Data JPA
+- Integrating React and TypeScript with backend APIs
+- Managing frontend application state using Zustand
+- Implementing interactive financial dashboards and data visualizations
+- Structuring and developing a full-stack application
 
-### 🔐 Login
-![Login](https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/login.png)  
-Link: https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/login.png
+## Developer
 
-### 📊 Dashboard
-![Dashboard](https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/dashboard.png)  
-Link: https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/dashboard.png
+**Pushpak Ganganmale**
 
-### 💵 Transactions
-![Transactions](https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/transactions.png)  
-Link: https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/transactions.png
+- GitHub: [PushpakG123](https://github.com/PushpakG123)
+- LinkedIn: [Pushpak Ganganmale](https://linkedin.com/in/pushpak-ganganmale-784a0a32b/)
 
-### 🗂 Categories
-![Categories](https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/categories.png)  
-Link: https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/categories.png
+---
 
-### 📈 Reports
-![Reports](https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/reports.png)  
-Link: https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/reports.png
-
-### 🔁 Recurring Payments
-![Recurring](https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/recurring.png)  
-Link: https://raw.githubusercontent.com/elifbugdayy/expense-tracker/main/screenshots/recurring.png
-
-
-
-🧪 Testing
-
-Backend unit-level tests
-
-H2 database auto-created
-
-JWT authentication flow tested
-
-📌 Future Improvements
-
-Export reports as PDF / CSV
-
-Recurring payment automation (cron jobs)
-
-Dark / Light theme
-
-Dockerization
-
-PostgreSQL production profile
-
-🎯 Purpose of the Project
-
-This project was built to practice full-stack development using real-world patterns such as authentication, REST API design, state management, and data visualization.
-
-It demonstrates clean architecture, secure backend practices, and a modern frontend UI. 
+If you find this project useful, consider giving the repository a star.
